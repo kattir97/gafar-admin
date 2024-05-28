@@ -5,6 +5,7 @@ export const WordBody = Type.Object({
   description: Type.String(),
   speechPart: Type.String(),
   origin: Type.String(),
+  comment: Type.String(),
   ergative: Type.String(),
   defaultMorfant: Type.String(),
   tags: Type.Array(Type.String()),

@@ -13,6 +13,8 @@ function Word() {
     speechPart,
     setSpeechPart,
     origin,
+    comment,
+    setComment,
     setOrigin,
     ergative,
     setErgative,
@@ -28,6 +30,10 @@ function Word() {
 
   const handleSpeechPartChange = (value: string) => {
     setSpeechPart(value);
+  };
+
+  const handleCommentChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setComment(e.target.value);
   };
 
   const handleOriginChange = (value: string[]) => {
@@ -49,6 +55,7 @@ function Word() {
         label="speech part"
       />
       <CustomAntInput label="Ergative" value={ergative} onChange={handleErgativeChange} />
+      <CustomAntInput label="Comment" value={comment} onChange={handleCommentChange} />
       <CustomAntSelect
         options={originOptions}
         handleMultipleChange={handleOriginChange}

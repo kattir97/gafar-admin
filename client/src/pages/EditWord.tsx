@@ -27,6 +27,7 @@ export function EditWord() {
     setWord,
     setTags,
     updateWord,
+    setComment,
     reset,
   } = useEditorStore((state) => state);
 
@@ -76,7 +77,7 @@ export function EditWord() {
 
     setWord(data.word);
     setDescription(data.description);
-
+    setComment(data.comment);
     setErgative(data.ergative);
     setSpeechPart(data.speechPart);
     setDefaultMorfant(data.defaultMorfant);
