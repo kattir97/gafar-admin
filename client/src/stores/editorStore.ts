@@ -9,6 +9,7 @@ interface I_EditorStore {
   description: string;
   speechPart: string;
   origin: string[];
+  comment: string;
   ergative: string;
   tags: string[];
   defaultMorfant: string;
@@ -23,6 +24,7 @@ interface I_EditorStoreActions {
   setWord: (word: string) => void;
   setDescription: (description: string) => void;
   setSpeechPart: (speechPart: string) => void;
+  setComment: (comment: string) => void;
   setOrigin: (origin: string[]) => void;
   setErgative: (ergative: string) => void;
   setTags: (tags: string[]) => void;
@@ -41,6 +43,7 @@ const getWordData = () => {
     description: state.description,
     speechPart: state.speechPart,
     origin: state.origin.join(','),
+    comment: state.comment,
     ergative: state.ergative,
     tags: state.tags,
     defaultMorfant: state.defaultMorfant,
@@ -58,6 +61,7 @@ export const initialState: I_EditorStore = {
   description: "",
   speechPart: "",
   origin: [],
+  comment: "",
   ergative: "",
   tags: [],
   defaultMorfant: "",
@@ -73,6 +77,7 @@ export const useEditorStore = create<I_EditorStore & I_EditorStoreActions>()((se
   setDescription: (description) => set({ description }),
   setSpeechPart: (speechPart) => set({ speechPart }),
   setOrigin: (origin) => set({ origin }),
+  setComment: (comment) => set({ comment }),
   setErgative: (ergative) => set({ ergative }),
   setTags: (tags) => set({ tags }),
   setDefaultMorfant: (defaultMorfant) => set({ defaultMorfant }),
@@ -104,6 +109,7 @@ export const useEditorStore = create<I_EditorStore & I_EditorStoreActions>()((se
     speechPart: "",
     origin: [],
     ergative: "",
+    comment: "",
     tags: [],
     defaultMorfant: "",
     definitions: [{ id: uuidv4(), definition: "" }],

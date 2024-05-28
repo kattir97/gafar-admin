@@ -26,6 +26,7 @@ export type WordType = {
   description: string;
   speechPart: string;
   ergative: string;
+  comment: string;
   origin: string;
   defaultMorfant: string;
   audio: string;
