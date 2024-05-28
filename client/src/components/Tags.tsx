@@ -47,16 +47,18 @@ export function Tags() {
   });
 
   return (
-    <div className=" flex flex-col items-center p-2">
-      <h2 className="text-lg mb-2">Tags</h2>
-      <CustomAntInput
-        label="Add a tag..."
-        value={inputValue}
-        onChange={(e) => handleChangeTag(e)}
-        onKeyDown={(e) => handleAddTag(e)}
-      />
+    <>
+      <h2 className="text-lg mb-2 self-center">Tags</h2>
+      <div className=" flex flex-col w-1/3  items-center p-2">
+        <CustomAntInput
+          label="Add a tag..."
+          value={inputValue}
+          onChange={(e) => handleChangeTag(e)}
+          onKeyDown={(e) => handleAddTag(e)}
+        />
 
-      <div className="my-3 flex flex-wrap -m-1">{renderedTags}</div>
-    </div>
+        <div className="my-3 flex flex-wrap -m-1">{renderedTags}</div>
+      </div>
+    </>
   );
 }

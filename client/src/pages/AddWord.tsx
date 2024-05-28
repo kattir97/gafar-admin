@@ -21,9 +21,13 @@ export function AddWord() {
   };
 
   const handleAddWord = async () => {
-    await addWord();
-    reset();
-    navigate("/home");
+    try {
+      await addWord();
+      reset();
+      navigate("/home");
+    } catch (error) {
+      alert(error);
+    }
   };
 
   return (

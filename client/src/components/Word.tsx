@@ -18,11 +18,6 @@ function Word() {
     setErgative,
   } = useEditorStore((state) => state);
 
-  const handleBlur = (e: ChangeEvent<HTMLInputElement>, stateSetter: ([key]: string) => void) => {
-    const { value } = e.target;
-    stateSetter(value.trim());
-  };
-
   const handleWordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setWord(e.target.value);
   };
@@ -45,30 +40,15 @@ function Word() {
 
   return (
     <div className="flex flex-col w-full">
-      <CustomAntInput
-        label="Word"
-        value={word}
-        onChange={handleWordChange}
-        onBlur={(e) => handleBlur(e, setWord)}
-      />
-      <CustomAntInput
-        label="Description"
-        value={description}
-        onChange={handleDescriptionChange}
-        onBlur={(e) => handleBlur(e, setDescription)}
-      />
+      <CustomAntInput label="Word" value={word} onChange={handleWordChange} />
+      <CustomAntInput label="Description" value={description} onChange={handleDescriptionChange} />
       <CustomAntSelect
         handleSingleChange={handleSpeechPartChange}
         options={speechPartOptions}
         value={speechPart}
         label="speech part"
       />
-      <CustomAntInput
-        label="Ergative"
-        value={ergative}
-        onChange={handleErgativeChange}
-        onBlur={(e) => handleBlur(e, setErgative)}
-      />
+      <CustomAntInput label="Ergative" value={ergative} onChange={handleErgativeChange} />
       <CustomAntSelect
         options={originOptions}
         handleMultipleChange={handleOriginChange}

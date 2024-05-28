@@ -12,13 +12,6 @@ export const Examples = () => {
     setExamples([...examples, { id: uuidv4(), example: "", translation: "" }]);
   };
 
-  const handleInputBlur = (id: string, field: string) => {
-    const newList = examples.map((item: ExampleType & { [key: string]: string }) =>
-      item.id === id ? { ...item, [field]: item[field].trim() } : item
-    );
-    setExamples(newList);
-  };
-
   const handleChangeValue = (event: ChangeEvent<HTMLInputElement>, id: string) => {
     const updatedExample = examples.find((example) => example.id === id);
     if (updatedExample) {
@@ -54,15 +47,12 @@ export const Examples = () => {
             label={`Example ${num}`}
             value={example.example}
             onChange={(e) => handleChangeValue(e, example.id)}
-            onBlur={() => handleInputBlur(example.id, "example")}
           />
 
           <CustomAntInput
             label={`Translation ${num}`}
             value={example.translation}
             onChange={(e) => handleChangeTranslation(e, example.id)}
-            onBlur={() => handleInputBlur(example.id, "translation")}
-            // handleDelete={() => handleRemoveExample(example.id)}
           />
         </div>
 

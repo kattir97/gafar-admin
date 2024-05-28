@@ -16,13 +16,6 @@ export const Conjugations = () => {
     ]);
   };
 
-  const handleInputBlur = (id: string, field: string) => {
-    const newList = conjugations.map((item: ConjugationType & { [key: string]: string }) =>
-      item.id === id ? { ...item, [field]: item[field].trim() } : item
-    );
-    setConjugations(newList);
-  };
-
   const handleChangeTranslation = (event: ChangeEvent<HTMLInputElement>, id: string) => {
     const updatedConjugation = conjugations.find((conjug) => conjug.id === id);
     if (updatedConjugation) {
@@ -73,21 +66,18 @@ export const Conjugations = () => {
             label={`Morfant ${num}`}
             value={conjug.morfant}
             onChange={(e) => handleChangeMorfant(e, conjug.id)}
-            onBlur={() => handleInputBlur(conjug.id, "morfant")}
           />
 
           <CustomAntInput
             label={`Conjugation ${num}`}
             value={conjug.conjugation}
             onChange={(e) => handleChangeConjugation(e, conjug.id)}
-            onBlur={() => handleInputBlur(conjug.id, "conjugation")}
           />
 
           <CustomAntInput
             label={`Translation ${num}`}
             value={conjug.translation}
             onChange={(e) => handleChangeTranslation(e, conjug.id)}
-            onBlur={() => handleInputBlur(conjug.id, "translation")}
           />
         </div>
         <InputControlButtons

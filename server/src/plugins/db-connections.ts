@@ -41,6 +41,10 @@ const dialect = new PostgresDialect({
   })
 })
 
+export const db = new Kysely<DB>({
+  dialect,
+});
+
 declare module 'fastify' {
   interface FastifyInstance {
     db: Kysely<DB>;

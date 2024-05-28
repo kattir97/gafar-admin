@@ -15,7 +15,6 @@ export const CustomAntInput: React.FC<InputProps> = ({
   handleAdd,
   ...rest
 }) => {
-  // const isButtonVisible = deleteButton ? "visible" : "hidden";
   return (
     <div className="flex items-center mb-3 w-full gap-2">
       <AntInput {...rest} placeholder={label} className="w-full" size="large" />

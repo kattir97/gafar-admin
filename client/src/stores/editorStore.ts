@@ -101,7 +101,7 @@ export const useEditorStore = create<I_EditorStore & I_EditorStoreActions>()((se
   reset: () => set(() => ({
     word: "",
     description: "",
-    speechPart: "pick",
+    speechPart: "",
     origin: [],
     ergative: "",
     tags: [],

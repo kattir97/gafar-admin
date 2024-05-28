@@ -5,14 +5,6 @@ import { CustomAntInput } from "./CustomAntInput";
 export const DefaultMorfant: React.FC = () => {
   const { defaultMorfant, setDefaultMorfant } = useEditorStore((state) => state);
 
-  const handleInputBlur = (
-    e: ChangeEvent<HTMLInputElement>,
-    stateSetter: ([key]: string) => void
-  ) => {
-    const { value } = e.target;
-    stateSetter(value.trim());
-  };
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setDefaultMorfant(e.target.value);
   };
@@ -23,7 +15,6 @@ export const DefaultMorfant: React.FC = () => {
         label="Deafult Morfant"
         value={defaultMorfant}
         onChange={handleChange}
-        onBlur={(e) => handleInputBlur(e, setDefaultMorfant)}
       />
     </div>
   );

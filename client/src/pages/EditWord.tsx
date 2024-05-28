@@ -28,10 +28,6 @@ export function EditWord() {
     setTags,
     updateWord,
     reset,
-    speechPart,
-    examples,
-    conjugations,
-    origin,
   } = useEditorStore((state) => state);
 
   useEffect(() => {
@@ -67,25 +63,26 @@ export function EditWord() {
   );
 
   useEffect(() => {
+    setOrigin(data.origin ? data.origin.split(",") : []);
+    setDefinitions(data.definitions.length > 0 ? defArr : [{ id: uuidv4(), definition: "" }]);
+    setExamples(
+      data.examples.length > 0 ? examplesArr : [{ id: uuidv4(), example: "", translation: "" }]
+    );
+    setConjugations(
+      data.conjugations.length > 0
+        ? conArr
+        : [{ id: uuidv4(), morfant: "", conjugation: "", translation: "" }]
+    );
+
     setWord(data.word);
     setDescription(data.description);
-    if (!origin) {
-      setOrigin(data.origin.split(","));
-    }
+
     setErgative(data.ergative);
     setSpeechPart(data.speechPart);
     setDefaultMorfant(data.defaultMorfant);
 
-    setDefinitions(defArr);
-    if (!examples) {
-      setExamples(examplesArr);
-    }
-    if (!conjugations) {
-      setConjugations(conArr);
-    }
     setTags(data.tags);
   }, []);
-  console.log("speechPart", speechPart);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

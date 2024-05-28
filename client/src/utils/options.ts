@@ -38,6 +38,7 @@ export const speechPartOptions = [
 ];
 
 export const originOptions = [
+  { value: "агулизм", label: "агулизм" },
   { value: "лезгинизм", label: "лезгинизм" },
   { value: "арабизм", label: "арабизм" },
   { value: "персизм", label: "персизм" },

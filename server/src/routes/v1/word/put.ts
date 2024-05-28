@@ -3,21 +3,24 @@ import { WordId } from "../../../schemas/word/params.js";
 import { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
 import { WordBody } from "../../../schemas/word/body.js";
 import { getErrorMessage } from "../../../utils/getErrorMessage.js";
+import { trimStrings } from "../../../utils/trimStrings.js";
 
 const routes: FastifyPluginAsyncTypebox = async (app) => {
   app.put("/:wordId", { schema: { params: WordId, body: WordBody } }, async (req, reply) => {
     const wordId = parseInt(req.params.wordId);
 
-    const word = req.body.word;
-    const description = req.body.description;
-    const speechPart = req.body.speechPart;
-    const origin = req.body.origin;
-    const ergative = req.body.ergative;
-    const defaultMorfant = req.body.defaultMorfant;
-    const tags = req.body.tags;
-    const defs = req.body.definitions;
-    const examples = req.body.examples;
-    const conjugations = req.body.conjugations;
+    const trimmedBody = trimStrings(req.body);
+
+    const word = trimmedBody.word
+    const description = trimmedBody.description
+    const speechPart = trimmedBody.speechPart
+    const origin = trimmedBody.origin
+    const ergative = trimmedBody.ergative
+    const defaultMorfant = trimmedBody.defaultMorfant
+    const tags = trimmedBody.tags
+    const defs = trimmedBody.definitions
+    const examples = trimmedBody.examples
+    const conjugations = trimmedBody.conjugations;
 
 
     try {
