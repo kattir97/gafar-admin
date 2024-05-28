@@ -16,6 +16,7 @@ const routes: FastifyPluginAsyncTypebox = async (app) => {
     const speechPart = trimmedBody.speechPart
     const origin = trimmedBody.origin
     const ergative = trimmedBody.ergative
+    const comment = trimmedBody.comment
     const defaultMorfant = trimmedBody.defaultMorfant
     const tags = trimmedBody.tags
     const defs = trimmedBody.definitions
@@ -35,6 +36,7 @@ const routes: FastifyPluginAsyncTypebox = async (app) => {
           word: word,
           speech_part: speechPart,
           origin: origin,
+          comment: comment,
           ergative: ergative,
           description: description,
           default_morfant: defaultMorfant,
