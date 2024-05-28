@@ -8,7 +8,7 @@
     "dev": "cross-env FASTIFY_AUTOLOAD_TYPESCRIPT=1 node --import tsx/esm --watch src/index.ts",
     "build": "tsc",
     "generate:db:types": "kysely-codegen",
-    "migrate": "node dist/migrate.js"
+    "migrate": "npm run build && node dist/src/database/migrate.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,10 +24,11 @@
     "fastify": "^4.25.2",
     "fastify-plugin": "^4.5.1",
     "fastify-qs": "^4.0.2",
+    "knex": "^3.1.0",
     "kysely": "^0.27.3",
     "lodash": "^4.17.21",
     "nodemon": "^3.0.3",
-    "pg": "^8.11.3",
+    "pg": "^8.11.5",
     "pino-pretty": "^11.0.0",
     "ts-node": "^10.9.2"
   },
