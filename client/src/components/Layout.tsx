@@ -8,7 +8,7 @@ export const Layout: React.FC = () => {
           <span className="text-xl font-bold ">Gafar Admin </span>
         </Link>
       </div>
-      <div className="flex justify-center py-10  min-h-[90vh]">
+      <div className="flex justify-center py-5  min-h-[90vh]">
         <div className="w-2/3 my-0 mx-auto border-1 border-inherit border-solid rounded">
           <Outlet />
         </div>

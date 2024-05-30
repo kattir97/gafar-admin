@@ -11,12 +11,22 @@ import { Button, Input } from "antd";
 import { IoPencil, IoTrash } from "react-icons/io5";
 import "../css_modules/pagination.css";
 import { CustomPagination } from "../components/CustomPagination";
+import { Sorting } from "../components/Sorting";
 
 const { Search } = Input;
 
 export default function Home() {
-  const { words, setWords, getAllWords, itemsPerPage, setCurrentPage, currentPage, searchWords } =
-    useHomeStore((state) => state);
+  const {
+    words,
+    setWords,
+    getAllWords,
+    itemsPerPage,
+    setCurrentPage,
+    currentPage,
+    searchWords,
+    sortBy,
+    orderBy,
+  } = useHomeStore((state) => state);
   const [total, setTotal] = useState<number>(0);
   // const pagesCount = Math.ceil(total / itemsPerPage);
   const [foundWords, setFoundWords] = useState<WordType[]>([]);
@@ -28,13 +38,12 @@ export default function Home() {
   useEffect(() => {
     const fetchWords = async () => {
       const result = await getAllWords();
-
       setWords(result.data.words);
       setTotal(result.data.count);
     };
 
     fetchWords();
-  }, [currentPage, getAllWords, setWords]);
+  }, [currentPage, getAllWords, setWords, sortBy, orderBy]);
 
   const pageCount = useMemo(() => Math.ceil(total / itemsPerPage), [total, itemsPerPage]);
 
@@ -111,6 +120,8 @@ export default function Home() {
         onChange={handleSearchText}
         className="mb-5"
       />
+      <Sorting />
+
       <div className="mb-auto">
         {foundWords.length > 0 ? renderedWords(foundWords) : renderedWords(words)}
       </div>

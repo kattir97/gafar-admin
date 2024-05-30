@@ -8,12 +8,16 @@ interface I_HomeStore {
   currentPage: number;
   itemsPerPage: number;
   title: string;
+  sortBy: string;
+  orderBy: string
 }
 
 interface I_HomeStoreActions {
   setWords: (words: WordType[]) => void;
   setCurrentPage: (currPage: number) => void;
   setTitle: (title: string) => void;
+  setSortBy: (value: string) => void;
+  setOrderBy: (value: string) => void;
   getAllWords: () => Promise<AxiosResponse<WordsApiResponse>>
   searchWords: (title: string) => Promise<AxiosResponse>
   deleteWord: (id: number) => Promise<AxiosResponse<{ status: string; message: string }>>
@@ -28,10 +32,21 @@ export const useHomeStore = create<I_HomeStore & I_HomeStoreActions>()((set, get
   itemsPerPage: 10,
   title: '',
   setTitle: (title: string) => set({ title }),
+  sortBy: 'created_at',
+  orderBy: 'desc',
+  setSortBy: (sortBy: string) => set({ sortBy }),
+  setOrderBy: (orderBy: string) => set({ orderBy }),
 
   getAllWords: async (): Promise<AxiosResponse<WordsApiResponse>> => {
+    const itemsPerPage = get().itemsPerPage;
+    const currentPage = get().currentPage;
+    const sortBy = get().sortBy;
+    const orderBy = get().orderBy;
+
+
+
     const response = await gafarApi.get(
-      `words?limit=${get().itemsPerPage}&offset=${get().currentPage * get().itemsPerPage}`
+      `words?limit=${itemsPerPage}&offset=${currentPage * itemsPerPage}&sortBy=${sortBy}&orderBy=${orderBy}`
     );
     console.log('response', response);
     return response;
