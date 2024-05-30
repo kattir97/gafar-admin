@@ -7,8 +7,7 @@
   "scripts": {
     "dev": "cross-env FASTIFY_AUTOLOAD_TYPESCRIPT=1 node --import tsx/esm --watch src/index.ts",
     "build": "tsc",
-    "generate:db:types": "kysely-codegen",
-    "migrate": "npm run build && node dist/src/database/migrate.js"
+    "generate:db:types": "kysely-codegen"
   },
   "author": "",
   "license": "ISC",

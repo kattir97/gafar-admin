@@ -1,40 +1,37 @@
 import { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
 import { convertToCamelCase } from "../../../utils/caseConverter.js";
 import { getErrorMessage } from "../../../utils/getErrorMessage.js";
+import { assertIsOrderBy, assertIsSortBy } from "../../../utils/sortingTypeGuard.js";
 
 interface QueryParams {
   limit?: number;
   offset?: number;
+  sortBy?: 'create_at' | "word";
+  orderBy?: "desc" | "asc";
 }
 
 const routes: FastifyPluginAsyncTypebox = async (app) => {
   app.get("/",
     async (req, reply) => {
-      const { limit = 10, offset = 0 } = req.query as QueryParams;
+      const { limit = 10, offset = 0, sortBy = "created_at", orderBy = "desc" } = req.query as QueryParams;
       try {
 
-        // const totalRes = await app.pg.query("SELECT COUNT(*) as total FROM words");
+        assertIsSortBy(sortBy);
+        assertIsOrderBy(orderBy);
+
         const countRes = await app.db.selectFrom('words').select(({ fn }) => [fn.count('id').as('count')]).executeTakeFirst();
-        // const words = await app.pg.query(
-        //   "SELECT * FROM words ORDER BY word ASC LIMIT $1 OFFSET $2",
-        //   [limit, offset]
-        // );
+
         const words = await app.db.selectFrom('words')
           .selectAll()
-          .orderBy('word', 'asc')
+          .orderBy(sortBy, orderBy)
           .limit(limit)
           .offset(offset)
           .execute();
 
-        // const defs = await app.pg.query("SELECT * FROM definitions");
         const defs = await app.db.selectFrom('definitions').selectAll().execute();
-        // const examples = await app.pg.query("SELECT * FROM examples");
         const examples = await app.db.selectFrom('examples').selectAll().execute();
-        // const conjugations = await app.pg.query("SELECT * FROM conjugations");
         const conjugations = await app.db.selectFrom('conjugations').selectAll().execute();
-        // const tags = await app.pg.query(
-        //   "SELECT * FROM tags JOIN wordtags ON wordtags.tag_id = tags.id"
-        // );
+
         const tags = await app.db.selectFrom('tags')
           .innerJoin('wordtags', 'wordtags.tag_id', 'tags.id')
           .select(['tags.tag', 'wordtags.word_id'])
